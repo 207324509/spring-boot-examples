@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Basic CRUD Application - jQuery EasyUI CRUD Demo</title>
+    <link rel="stylesheet" type="text/css" href="easyui/themes/black/easyui.css"/>
+    <link rel="stylesheet" type="text/css" href="easyui/themes/icon.css"/>
+    <link rel="stylesheet" type="text/css" href="easyui/themes/color.css"/>
+    <link rel="stylesheet" type="text/css" href="easyui/demo/demo.css"/>
+    <script type="text/javascript" src="easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="easyui/jquery.edatagrid.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#dg').edatagrid({
+                url: '/get_users',
+                saveUrl: '/save_user',
+                updateUrl: '/update_user',
+                destroyUrl: '/delete_user'
+            });
+        });
+    </script>
+</head>
+<body>
+<h2>Basic CRUD Application</h2>
+<p>Click the buttons on datagrid toolbar to do crud actions.</p>
+
+<table id="dg" title="My Users" style="width:550px;height:250px"
+       toolbar="#toolbar" idField="id" pagination="true"
+       rownumbers="true" fitColumns="true" singleSelect="true">
+    <thead>
+    <tr>
+        <th field="firstname" width="50" editor="{type:'validatebox',options:{required:true}}">First Name</th>
+        <th field="lastname" width="50" editor="{type:'validatebox',options:{required:true}}">Last Name</th>
+        <th field="phone" width="50" editor="text">Phone</th>
+        <th field="email" width="50" editor="{type:'validatebox',options:{validType:'email'}}">Email</th>
+    </tr>
+    </thead>
+</table>
+<div id="toolbar">
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true"
+       onclick="javascript:$('#dg').edatagrid('addRow')">New
+    </a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+       onclick="javascript:$('#dg').edatagrid('destroyRow')">Remove
+    </a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true"
+       onclick="javascript:$('#dg').edatagrid('saveRow')">Save
+    </a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo" plain="true"
+       onclick="javascript:$('#dg').edatagrid('cancelRow')">Cancel
+    </a>
+</div>
+
+
+<style type="text/css">
+    #fm {
+        margin: 0;
+        padding: 10px 30px;
+    }
+
+    .ftitle {
+        font-size: 14px;
+        font-weight: bold;
+        padding: 5px 0;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .fitem {
+        margin-bottom: 5px;
+    }
+
+    .fitem label {
+        display: inline-block;
+        width: 80px;
+    }
+
+    .fitem input {
+        width: 160px;
+    }
+</style>
+</body>
+</html>
