@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Basic CRUD Application - jQuery EasyUI CRUD Demo</title>
+    <link rel="stylesheet" type="text/css" href="/easyui/themes/default/easyui.css"/>
+    <link rel="stylesheet" type="text/css" href="/easyui/themes/icon.css"/>
+    <link rel="stylesheet" type="text/css" href="/easyui/themes/color.css"/>
+    <link rel="stylesheet" type="text/css" href="/easyui/demo/demo.css"/>
+    <style type="text/css">
+        .dd-demo {
+            width: 60px;
+            height: 60px;
+            border: 2px solid #d3d3d3;
+            position: absolute;
+        }
+
+        .proxy {
+            border: 1px dotted #333;
+            width: 60px;
+            height: 60px;
+            text-align: center;
+            background: #fafafa;
+        }
+
+        #dd1 {
+            background: #E0ECFF;
+            left: 20px;
+            top: 20px;
+        }
+
+        #dd2 {
+            background: #8DB2E3;
+            left: 100px;
+            top: 20px;
+        }
+
+        #dd3 {
+            background: #FBEC88;
+            left: 180px;
+            top: 20px;
+        }
+    </style>
+    <script type="text/javascript" src="/easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $('#dd1').draggable();
+
+            $('#dd2').draggable({
+                proxy: 'clone'
+            });
+
+            $('#dd3').draggable({
+                proxy: function (source) {
+                    var p = $('<div class="proxy">proxy</div>');
+                    p.appendTo('body');
+                    return p;
+                }
+            });
+        });
+
+    </script>
+</head>
+<body>
+<h2>Drag and Drop Demo</h2>
+<p>Drag the box to what position you want.</p>
+<div id="dd1" class="dd-demo"></div>
+<div id="dd2" class="dd-demo"></div>
+<div id="dd3" class="dd-demo"></div>
+</body>
+</html>

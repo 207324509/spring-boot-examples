@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Basic CRUD Application - jQuery EasyUI CRUD Demo</title>
+    <link rel="stylesheet" type="text/css" href="/easyui/themes/default/easyui.css"/>
+    <link rel="stylesheet" type="text/css" href="/easyui/themes/icon.css"/>
+    <link rel="stylesheet" type="text/css" href="/easyui/themes/color.css"/>
+    <link rel="stylesheet" type="text/css" href="/easyui/demo/demo.css"/>
+    <style type="text/css">
+        .left{
+            width:120px;
+            float:left;
+        }
+        .left table{
+            background:#E0ECFF;
+        }
+        .left td{
+            background:#eee;
+        }
+        .right{
+            float:right;
+            width:570px;
+        }
+        .right table{
+            background:#E0ECFF;
+            width:100%;
+        }
+        .right td{
+            background:#fafafa;
+            color:#444;
+            text-align:center;
+            padding:2px;
+        }
+        .right td{
+            background:#E0ECFF;
+        }
+        .right td.drop{
+            background:#fafafa;
+            width:100px;
+        }
+        .right td.over{
+            background:#FBEC88;
+        }
+        .item{
+            text-align:center;
+            border:1px solid #499B33;
+            background:#fafafa;
+            color:#444;
+            width:100px;
+        }
+        .assigned{
+            border:1px solid #BC2A4D;
+        }
+        .trash{
+            background-color:red;
+        }
+    </style>
+    <script type="text/javascript" src="/easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $('.left .item').draggable({ // 课程名称
+                revert:true,
+                proxy:'clone'
+            });
+            $('.right td.drop').droppable({//时间表
+                onDragEnter:function(){// 当可拖动元素被拖进来时触发
+                    $(this).addClass('over');
+                },
+                onDragLeave:function(){// 当可拖动元素被拖离开时触发
+                    $(this).removeClass('over');
+                },
+                onDrop:function(e,source){// 当可拖动元素被放下时触发
+                    $(this).removeClass('over');
+                    if ($(source).hasClass('assigned')){
+                        $(this).append(source);
+                    } else {
+                        var c = $(source).clone().addClass('assigned');
+                        $(this).empty().append(c);
+                        c.draggable({
+                            revert:true
+                        });
+                    }
+                }
+            });
+            $('.left').droppable({// 课程名称表
+                accept:'.assigned',
+                onDragEnter:function(e,source){ //当可拖动元素被拖进来时触发
+                    $(source).addClass('trash');
+                },
+                onDragLeave:function(e,source){ //当可拖动元素被拖离开时触发
+                    $(source).removeClass('trash');
+                },
+                onDrop:function(e,source){// 当可拖动元素被放下时触发
+                    $(source).remove();
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<h2>Creating a School Timetable</h2>
+<div class="demo-info" style="margin-bottom:10px">
+    <div class="demo-tip icon-tip">&nbsp;</div>
+    <div>Click and drag a class to timetable.</div>
+</div>
+<div style="width:700px;">
+    <div class="left">
+        <table>
+            <tr>
+                <td><div class="item">语文</div></td>
+            </tr>
+            <tr>
+                <td><div class="item">数学</div></td>
+            </tr>
+            <tr>
+                <td><div class="item">英语</div></td>
+            </tr>
+            <tr>
+                <td><div class="item">政治</div></td>
+            </tr>
+            <tr>
+                <td><div class="item">历史</div></td>
+            </tr>
+            <tr>
+                <td><div class="item">地理</div></td>
+            </tr>
+            <tr>
+                <td><div class="item">物理</div></td>
+            </tr>
+            <tr>
+                <td><div class="item">生物</div></td>
+            </tr>
+            <tr>
+                <td><div class="item">化学</div></td>
+            </tr>
+        </table>
+    </div>
+    <div class="right">
+        <table>
+            <tr>
+                <td class="blank"></td>
+                <td class="title">星期一</td>
+                <td class="title">星期二</td>
+                <td class="title">星期三</td>
+                <td class="title">星期四</td>
+                <td class="title">星期五</td>
+            </tr>
+            <tr>
+                <td class="time">08:00</td>
+                <td class="drop"></td>
+                <td class="drop"></td>
+                <td class="drop"></td>
+                <td class="drop"></td>
+                <td class="drop"></td>
+            </tr>
+            <tr>
+                <td class="time">09:00</td>
+                <td class="drop"></td>
+                <td class="drop"></td>
+                <td class="drop"></td>
+                <td class="drop"></td>
+                <td class="drop"></td>
+            </tr>
+            <tr>
+                <td class="time">10:00</td>
+                <td class="drop"></td>
+                <td class="drop"></td>
+                <td class="drop"></td>
+                <td class="drop"></td>
+                <td class="drop"></td>
+            </tr>
+            <tr>
+                <td class="time">11:00</td>
+                <td class="drop"></td>
+                <td class="drop"></td>
+                <td class="drop"></td>
+                <td class="drop"></td>
+                <td class="drop"></td>
+            </tr>
+            <tr>
+                <td class="time">12:00</td>
+                <td class="drop"></td>
+                <td class="drop"></td>
+                <td class="drop"></td>
+                <td class="drop"></td>
+                <td class="drop"></td>
+            </tr>
+            <tr>
+                <td class="time">13:00</td>
+                <td class="lunch" colspan="5">Lunch</td>
+            </tr>
+            <tr>
+                <td class="time">14:00</td>
+                <td class="drop"></td>
+                <td class="drop"></td>
+                <td class="drop"></td>
+                <td class="drop"></td>
+                <td class="drop"></td>
+            </tr>
+            <tr>
+                <td class="time">15:00</td>
+                <td class="drop"></td>
+                <td class="drop"></td>
+                <td class="drop"></td>
+                <td class="drop"></td>
+                <td class="drop"></td>
+            </tr>
+            <tr>
+                <td class="time">16:00</td>
+                <td class="drop"></td>
+                <td class="drop"></td>
+                <td class="drop"></td>
+                <td class="drop"></td>
+                <td class="drop"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>
