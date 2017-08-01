@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>jQuery EasyUI Demo</title>
+    <link rel="stylesheet" type="text/css" href="/easyui/themes/default/easyui.css"/>
+    <link rel="stylesheet" type="text/css" href="/easyui/themes/icon.css"/>
+
+    <script type="text/javascript" src="/easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript">
+
+    </script>
+</head>
+<body>
+    <div style="padding: 5px;background: #fafafa;width: 500px;border: 1px; solid:#ccc;">
+        <a href="#" class="easyui-menubutton" menu="#mm1" iconCls="icon-edit">编辑</a>
+        <a href="#" class="easyui-menubutton" menu="#mm2" iconCls="icon-help">帮助</a>
+    </div>
+
+    <div id="mm1" style="width: 150px;">
+        <div iconCls="icon-undo">Undo</div>
+        <div iconCls="icon-redo">Redo</div>
+        <div class="menu-sep"></div>
+        <div>剪切</div>
+        <div>复制</div>
+        <div>粘贴</div>
+        <div class="menu-sep"></div>
+        <div iconCls="icon-remove">删除</div>
+        <div>选中全部</div>
+    </div>
+
+    <div id="mm2" style="width: 100px">
+        <div>帮助</div>
+        <div>修改</div>
+        <div>关于</div>
+    </div>
+</body>
+</html>

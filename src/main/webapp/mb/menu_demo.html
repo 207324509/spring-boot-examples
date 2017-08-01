@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>jQuery EasyUI Demo</title>
+    <link rel="stylesheet" type="text/css" href="/easyui/themes/default/easyui.css"/>
+    <link rel="stylesheet" type="text/css" href="/easyui/themes/icon.css"/>
+
+    <script type="text/javascript" src="/easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(document).bind('contextmenu', function (e) {
+                $('#mm').menu('show', {
+                    left: e.pageX,
+                    top: e.pageY
+                });
+                return false;
+            });
+        });
+
+        function showmenu() {
+            $('#mm').menu('show', {
+                left: 200,
+                top: 100
+            });
+        }
+
+    </script>
+</head>
+<body>
+<div>
+    Click <a href="#" onclick="showmenu()">here</a> to show the menu.
+</div>
+<div id="mm" class="easyui-menu" style="width:120px;">
+    <div onclick="javascript:alert('new')">New</div>
+    <div>
+        <span>Open</span>
+        <div style="width:150px;">
+            <div><b>Word</b></div>
+            <div>Excel</div>
+            <div>PowerPoint</div>
+        </div>
+    </div>
+    <div icon="icon-save">Save</div>
+    <div class="menu-sep"></div>
+    <div>Exit</div>
+</div>
+
+</body>
+</html>

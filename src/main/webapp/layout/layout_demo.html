@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>jQuery EasyUI Demo</title>
+    <link rel="stylesheet" type="text/css" href="/easyui/themes/default/easyui.css"/>
+    <link rel="stylesheet" type="text/css" href="/easyui/themes/icon.css"/>
+
+    <script type="text/javascript" src="/easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            showcontent('java');
+        });
+
+        function showcontent(language) {
+            $('#content').html('Introduction to ' + language + ' language');
+        }
+    </script>
+</head>
+<body>
+<div class="easyui-layout" style="width: 400px;height: 200px;">
+    <div region="west" split="true" title="Navigator" style="width: 150px;">
+        <p style="padding: 5px;margin: 0;">Select language:</p>
+        <ul>
+            <li><a href="javascript:void(0)" onclick="showcontent('java')">Java</a></li>
+            <li><a href="javascript:void(0)" onclick="showcontent('cshape')">C#</a></li>
+            <li><a href="javascript:void(0)" onclick="showcontent('vb')">VB</a></li>
+            <li><a href="javascript:void(0)" onclick="showcontent('erlang')">Erlang</a></li>
+        </ul>
+    </div>
+    <div id="content" region="center" title="Language" style="padding:5px;"></div>
+</div>
+</body>
+</html>
