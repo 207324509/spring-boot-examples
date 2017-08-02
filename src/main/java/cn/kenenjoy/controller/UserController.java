@@ -14,7 +14,9 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hefa on 2017/7/28.
@@ -28,7 +30,7 @@ public class UserController {
 
     @RequestMapping("/")
     public String index(HttpSession session) {
-        session.setAttribute("uuid",UUIDTool.getUUID());
+        session.setAttribute("uuid", UUIDTool.getUUID());
         log.debug("进入index");
         return "index";
     }
@@ -58,7 +60,7 @@ public class UserController {
     }
 
 
-    @RequestMapping(value = "get_feed",produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "get_feed", produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String getFeed(@RequestParam(value = "url", required = false) String url) {
         log.debug("进入delete_user");
@@ -70,21 +72,38 @@ public class UserController {
     }
 
 
-
-
-
     /**
      * 查询用户
      *
      * @return
      */
-    @RequestMapping(value = "/get_users",produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/get_users", produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String getUsers() {
+    public String getUsers(String sort, String order,int page,int rows) {
         log.debug("进入get_users");
-        List<User> users = userService.getUsers();
+        if (sort == null || "".equals(sort.trim())) {
+            sort = "id";
+        }
+
+        if (order == null || "".equals(order.trim())) {
+            order = "asc";
+        }
+
+//        if (page == null ||"".equals(page.trim())){
+//            page = "1";
+//        }
+//        if (rows == null ||"".equals(rows.trim())){
+//            rows = "10";
+//        }
+        List<User> users = userService.getUsers(sort, order, page, rows);
+        String total = userService.countUsers().toString();
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("total",total);
+        map.put("rows",users);
         Gson gson = new Gson();
-        return gson.toJson(users);
+        String result = gson.toJson(map);
+        log.debug(result);
+        return result;
 
     }
 
@@ -131,14 +150,14 @@ public class UserController {
             try {
                 userService.saveUser(user);
                 result.setSuccess("success");
-            } catch (BadSqlGrammarException e){
+            } catch (BadSqlGrammarException e) {
                 result.setErrorMsg("保存用户数据库报错！");
-                log.error("保存用户数据库报错！",e);
+                log.error("保存用户数据库报错！", e);
             }
             // 针对保存后需要返回值做修改
             user = userService.findUserById(user.getId());
             return gson.toJson(user);
-        }else{
+        } else {
             result.setErrorMsg("保存用户报错，用户为空！");
         }
         return gson.toJson(result);

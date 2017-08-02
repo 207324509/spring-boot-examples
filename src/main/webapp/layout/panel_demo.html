@@ -5,32 +5,57 @@
     <title>jQuery EasyUI Demo</title>
     <link rel="stylesheet" type="text/css" href="/easyui/themes/default/easyui.css"/>
     <link rel="stylesheet" type="text/css" href="/easyui/themes/icon.css"/>
+    <style>
+        .p-search {
+            background: #fafafa;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-bottom: 0;
+            overflow: hidden;
+        }
+        .p-search input{
+            width: 300px;
+            border: 1px solid#ccc;
+            background: #fff url('/images/search.png') no-repeat right top;
+        }
+        .p-right{
+            text-align: center;
+            border: 1px solid #ccc;
+            border-left: 0;
+            width: 150px;
+            background: #fafafa;
+            padding-top: 10px;
+        }
+    </style>
 
     <script type="text/javascript" src="/easyui/jquery.min.js"></script>
     <script type="text/javascript" src="/easyui/jquery.easyui.min.js"></script>
-    <script type="text/javascript" src="/easyui/locale/easyui-lang-zh_CN.js"></script>
-    <script type="text/javascript">
-        $(function(){
-            showcontent('java');
-        });
-
-        function showcontent(language) {
-            $('#content').html('Introduction to ' + language + ' language');
-        }
-    </script>
 </head>
-<body>
-<div class="easyui-layout" style="width: 400px;height: 200px;">
-    <div region="west" split="true" title="Navigator" style="width: 150px;">
-        <p style="padding: 5px;margin: 0;">Select language:</p>
-        <ul>
-            <li><a href="javascript:void(0)" onclick="showcontent('java')">Java</a></li>
-            <li><a href="javascript:void(0)" onclick="showcontent('cshape')">C#</a></li>
-            <li><a href="javascript:void(0)" onclick="showcontent('vb')">VB</a></li>
-            <li><a href="javascript:void(0)" onclick="showcontent('erlang')">Erlang</a></li>
-        </ul>
+<body style="background: #fafafa;">
+<h1>Panel</h1>
+<div class="easyui-panel" title="Complex Panel Layout" iconCls="icon-search" collapsible="true"
+     style="padding:5px;width:500px;height:250px;">
+    <div class="easyui-layout" fit="true">
+        <div region="north" border="false" class="p-search">
+            <label>Search:</label><input></input>
+        </div>
+        <div region="center" border="false">
+            <div class="easyui-layout" fit="true">
+                <div region="east" border="false" class="p-right">
+                    <img src="/images/msn.gif"/>
+                </div>
+                <div region="center" border="false" style="border:1px solid #ccc;">
+                    <div class="easyui-layout" fit="true">
+                        <div region="south" split="true" border="false" style="height:60px;">
+                            <textarea style="border:0;width:100%;height:100%;resize:none">Hi,I am easyui.</textarea>
+                        </div>
+                        <div region="center" border="false">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div id="content" region="center" title="Language" style="padding:5px;"></div>
 </div>
 </body>
 </html>

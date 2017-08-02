@@ -6,56 +6,52 @@
     <link rel="stylesheet" type="text/css" href="/easyui/themes/default/easyui.css"/>
     <link rel="stylesheet" type="text/css" href="/easyui/themes/icon.css"/>
     <style>
-        .p-search {
-            background: #fafafa;
-            padding: 5px;
-            border: 1px solid #ccc;
-            border-bottom: 0;
-            overflow: hidden;
+        .panel-body{
+            background:#f0f0f0;
         }
-        .p-search input{
-            width: 300px;
-            border: 1px solid#ccc;
-            background: #fff url('/images/search.png') no-repeat right top;
+        .panel-header{
+            background:#fff url('/images/panel_header_bg.gif') no-repeat top right;
         }
-        .p-right{
-            text-align: center;
-            border: 1px solid #ccc;
-            border-left: 0;
-            width: 150px;
-            background: #fafafa;
-            padding-top: 10px;
+        .panel-tool-collapse{
+            background:url('/images/arrow_up.gif') no-repeat 0px -3px;
+        }
+        .panel-tool-expand{
+            background:url('/images/arrow_down.gif') no-repeat 0px -3px;
         }
     </style>
 
     <script type="text/javascript" src="/easyui/jquery.min.js"></script>
     <script type="text/javascript" src="/easyui/jquery.easyui.min.js"></script>
 </head>
-<body style="background: #fafafa;">
-<h1>Panel</h1>
-<div class="easyui-panel" title="Complex Panel Layout" iconCls="icon-search" collapsible="true"
-     style="padding:5px;width:500px;height:250px;">
-    <div class="easyui-layout" fit="true">
-        <div region="north" border="false" class="p-search">
-            <label>Search:</label><input></input>
-        </div>
-        <div region="center" border="false">
-            <div class="easyui-layout" fit="true">
-                <div region="east" border="false" class="p-right">
-                    <img src="/images/msn.gif"/>
-                </div>
-                <div region="center" border="false" style="border:1px solid #ccc;">
-                    <div class="easyui-layout" fit="true">
-                        <div region="south" split="true" border="false" style="height:60px;">
-                            <textarea style="border:0;width:100%;height:100%;resize:none">Hi,I am easyui.</textarea>
-                        </div>
-                        <div region="center" border="false">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<body>
+<div style="width:200px;height:auto;background:#7190E0;padding:5px;">
+    <div class="easyui-panel" title="Picture Tasks" collapsible="true" style="width:200px;height:auto;padding:10px;">
+        View as a slide show<br/>
+        Order prints online<br/>
+        Print pictures
+    </div>
+    <br/>
+    <div class="easyui-panel" title="File and Folder Tasks" collapsible="true" style="width:200px;height:auto;padding:10px;">
+        Make a new folder<br/>
+        Publish this folder to the Web<br/>
+        Share this folder
+    </div>
+    <br/>
+    <div class="easyui-panel" title="Other Places" collapsible="true" collapsed="true" style="width:200px;height:auto;padding:10px;">
+        New York<br/>
+        My Pictures<br/>
+        My Computer<br/>
+        My Network Places
+    </div>
+    <br/>
+    <div class="easyui-panel" title="Details" collapsible="true" style="width:200px;height:auto;padding:10px;">
+        My documents<br/>
+        File folder<br/><br/>
+        Date modified: Oct.3rd 2010
     </div>
 </div>
+
+</div>
+
 </body>
 </html>

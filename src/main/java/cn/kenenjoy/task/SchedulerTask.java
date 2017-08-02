@@ -16,7 +16,7 @@ public class SchedulerTask {
 
     private int count = 0;
 
-    @Scheduled(cron = "0 */1 * * * ?")
+    @Scheduled(cron = "0 0 1 * * ?")
     private void processCurrentTime() {
         System.out.println("this is scheduler task runing " + (count++)+"\t现在时间:" + dateFormat.format(new Date()));
     }

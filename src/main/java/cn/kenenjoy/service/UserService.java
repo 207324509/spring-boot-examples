@@ -11,7 +11,9 @@ import java.util.List;
 public interface UserService {
     User findUserById(String id);
 
-    List<User> getUsers();
+    List<User> getUsers(String sort, String order, int page, int rows);
+
+    Integer countUsers();
 
     void saveUser(User user);
 

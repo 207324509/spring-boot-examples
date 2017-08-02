@@ -1,15 +1,12 @@
 package cn.kenenjoy.service;
 
-import cn.kenenjoy.controller.UserController;
 import cn.kenenjoy.domain.User;
 import cn.kenenjoy.mapper.UserMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,19 +31,25 @@ public class UserServiceImpl implements UserService {
 
     @Cacheable(value = "users")
     @Override
-    public List<User> getUsers() {
+    public List<User> getUsers(String sort, String order, int page, int rows) {
         log.debug("getUsers查询数据库");
-        return userMapper.getUsers();
+        return userMapper.getUsers(sort, order, (page-1)*rows, rows);
+    }
+
+    @Cacheable(value = "users")
+    @Override
+    public Integer countUsers() {
+        return userMapper.countUsers();
     }
 
 
-    @CacheEvict(value = {"users"},allEntries = true)
+    @CacheEvict(value = {"users"}, allEntries = true)
     @Override
     public void saveUser(User user) {
         userMapper.saveUser(user);
     }
 
-    @CacheEvict(value = {"users"},allEntries = true)
+    @CacheEvict(value = {"users"}, allEntries = true)
     @Override
     public void updateUser(User user) {
         userMapper.updateUser(user);
@@ -54,7 +57,7 @@ public class UserServiceImpl implements UserService {
 
     // @CachePut 更新缓存策略 根据实际情况清理
     // @CacheEvict 清理所有
-    @CacheEvict(value = {"users"},allEntries = true)
+    @CacheEvict(value = {"users"}, allEntries = true)
     @Override
     public void deleteUser(String id) {
         userMapper.deleteUser(id);
