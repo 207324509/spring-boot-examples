@@ -16,12 +16,12 @@
 <p>Click the buttons on datagrid toolbar to do crud actions.</p>
 
 <table id="dg" title="My Users" class="easyui-datagrid" style="width:700px;height:250px"
-       url="/get_users"
+       url="/get_users" idField="id"
        toolbar="#toolbar" pagination="true"
-       rownumbers="true" fitColumns="true" singleSelect="true">
+       rownumbers="true" fitColumns="true">
     <thead>
     <tr>
-        <th field="id" checkbox="true"></th>
+        <th field="ck" checkbox="true"></th>
         <th field="firstname" sortable="true" width="50">First Name</th>
         <th field="lastname" sortable="true" width="50">Last Name</th>
         <th field="phone" sortable="true" width="50">Phone</th>
