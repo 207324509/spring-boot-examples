@@ -9,9 +9,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 /**
  * Created by hefa on 2017/7/28.
  */
-@ServletComponentScan
 @MapperScan("cn.kenenjoy.mapper")
 @EnableScheduling
+@ServletComponentScan
 @SpringBootApplication
 public class Application {
     public static void main(String[] args) {
