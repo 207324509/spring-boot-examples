@@ -1,4 +1,4 @@
-package cn.kenenjoy;
+package cn.kenenjoy.controller;
 
 
 import org.apache.http.HttpEntity;
@@ -16,7 +16,7 @@ import java.io.IOException;
 /**
  * Created by hefa on 2017/12/13.
  */
-public class FileUploadTest {
+public class FileControllerTest {
     public static void main(String[] args) throws IOException {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpPost httppost = new HttpPost("http://127.0.0.1:8080/file/uploadFiles");
