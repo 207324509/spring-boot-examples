@@ -34,6 +34,8 @@ public class FileControllerTest {
         } else {
             System.out.println("失败！");
         }
+
         response.close();
+        httpclient.close();
     }
 }
