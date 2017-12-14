@@ -1,4 +1,4 @@
-package cn.kenenjoy.configuration.redis;
+package cn.kenenjoy.redis;
 
 import cn.kenenjoy.domain.User;
 import cn.kenenjoy.util.UUIDTool;

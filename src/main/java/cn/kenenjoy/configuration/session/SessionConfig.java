@@ -1,4 +1,4 @@
-package cn.kenenjoy.util.session;
+package cn.kenenjoy.configuration.session;
 
 
 import org.springframework.context.annotation.Configuration;

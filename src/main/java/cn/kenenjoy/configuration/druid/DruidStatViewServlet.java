@@ -1,4 +1,4 @@
-package cn.kenenjoy.util.druid;
+package cn.kenenjoy.configuration.druid;
 
 import com.alibaba.druid.support.http.StatViewServlet;
 

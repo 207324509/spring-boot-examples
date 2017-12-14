@@ -1,4 +1,4 @@
-package cn.kenenjoy.util.redis;
+package cn.kenenjoy.configuration.redis;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachingConfigurerSupport;

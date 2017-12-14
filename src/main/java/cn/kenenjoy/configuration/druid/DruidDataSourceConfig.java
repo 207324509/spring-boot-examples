@@ -1,4 +1,4 @@
-package cn.kenenjoy.util.druid;
+package cn.kenenjoy.configuration.druid;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.slf4j.Logger;
