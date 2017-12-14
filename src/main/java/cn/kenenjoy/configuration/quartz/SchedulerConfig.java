@@ -1,4 +1,4 @@
-package cn.kenenjoy.util.quartz;
+package cn.kenenjoy.configuration.quartz;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package cn.kenenjoy.util.redis;
+package cn.kenenjoy.configuration.redis;
 
 import cn.kenenjoy.domain.User;
 import cn.kenenjoy.util.UUIDTool;
@@ -15,11 +15,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by hefa on 2017/12/11.
+ * Created by hefa on 2017/7/29.
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class RedisClusterTest {
+public class RedisTest {
 
     @Autowired
     public RedisTemplate redisTemplate;
@@ -39,12 +39,12 @@ public class RedisClusterTest {
 
     @Test
     public void testObject() {
-        User user = new User(UUIDTool.getUUID(), "S", "王", "18616716219", "wangwu@www.com");
+        User user = new User(UUIDTool.getUUID(), "杰", "王", "18616716219", "wangjie@jie.com");
 
         ValueOperations<String, User> operations = redisTemplate.opsForValue();
-        operations.set("user3", user);
+        operations.set("user1", user);
         // 带过期时间参数
-        operations.set("user4", user, 1, TimeUnit.SECONDS);
+        operations.set("user2", user, 1, TimeUnit.SECONDS);
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -57,6 +57,6 @@ public class RedisClusterTest {
             System.out.println("exists is false");
         }
 
-        Assert.assertEquals("S", operations.get("user1").getFirstname());
+        Assert.assertEquals("杰", operations.get("user1").getFirstname());
     }
 }

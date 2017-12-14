@@ -1,4 +1,4 @@
-package cn.kenenjoy.util.redis;
+package cn.kenenjoy.redis;
 
 import cn.kenenjoy.domain.User;
 import cn.kenenjoy.util.UUIDTool;
@@ -11,15 +11,16 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.test.context.junit4.SpringRunner;
+import redis.clients.util.JedisClusterCRC16;
 
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by hefa on 2017/7/29.
+ * Created by hefa on 2017/12/11.
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class RedisTest {
+public class RedisClusterTest {
 
     @Autowired
     public RedisTemplate redisTemplate;
@@ -39,12 +40,12 @@ public class RedisTest {
 
     @Test
     public void testObject() {
-        User user = new User(UUIDTool.getUUID(), "杰", "王", "18616716219", "wangjie@jie.com");
+        User user = new User(UUIDTool.getUUID(), "S", "王", "18616716219", "wangwu@www.com");
 
         ValueOperations<String, User> operations = redisTemplate.opsForValue();
-        operations.set("user1", user);
+        operations.set("user3", user);
         // 带过期时间参数
-        operations.set("user2", user, 1, TimeUnit.SECONDS);
+        operations.set("user4", user, 1, TimeUnit.SECONDS);
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -57,6 +58,9 @@ public class RedisTest {
             System.out.println("exists is false");
         }
 
-        Assert.assertEquals("杰", operations.get("user1").getFirstname());
+        Assert.assertEquals("S", operations.get("user1").getFirstname());
+
+
+        JedisClusterCRC16.getCRC16("");
     }
 }
