@@ -25,7 +25,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
@@ -51,12 +50,10 @@ public class FileControllerTests {
 
     @Test
     public void uploadFiles() throws Exception {
-        FileInputStream inputStream = new FileInputStream(new File("/Users/hefa/Downloads/abc.txt"));
-        MockMultipartFile mockMultipartFile = new MockMultipartFile("abc.txt", "Downloads/abc.txt", null, inputStream);
+        MockMultipartFile mockMultipartFile = new MockMultipartFile("abc.txt", "Downloads/abc.txt", null, "hello world!".getBytes());
         MockMultipartHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.fileUpload("/file/uploads");
         MvcResult mvcResult = mvc.perform(requestBuilder.file(mockMultipartFile)).andDo(MockMvcResultHandlers.print()).andReturn();
         assertEquals(MockHttpServletResponse.SC_OK, mvcResult.getResponse().getStatus());
-
 
     }
 
