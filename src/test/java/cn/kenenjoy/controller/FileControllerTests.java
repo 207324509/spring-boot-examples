@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -52,9 +53,11 @@ public class FileControllerTests {
     public void uploadFiles() throws Exception {
         FileInputStream inputStream = new FileInputStream(new File("/Users/hefa/Downloads/abc.txt"));
         MockMultipartFile mockMultipartFile = new MockMultipartFile("abc.txt", "Downloads/abc.txt", null, inputStream);
-        MockMultipartHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.fileUpload("/file/uploadFiles");
+        MockMultipartHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.fileUpload("/file/uploads");
         MvcResult mvcResult = mvc.perform(requestBuilder.file(mockMultipartFile)).andDo(MockMvcResultHandlers.print()).andReturn();
-        assertEquals(200, mvcResult.getResponse().getStatus());
+        assertEquals(MockHttpServletResponse.SC_OK, mvcResult.getResponse().getStatus());
+
+
     }
 
 
@@ -66,7 +69,7 @@ public class FileControllerTests {
      */
     public void main(String[] args) throws IOException {
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        HttpPost httppost = new HttpPost("http://127.0.0.1:8080/file/uploadFiles");
+        HttpPost httppost = new HttpPost("http://127.0.0.1:8080/file/uploads");
         MultipartEntityBuilder builder = MultipartEntityBuilder.create();
         File file = new File("/Users/hefa/Downloads/abc.txt");
         builder.addBinaryBody("abc.txt", file);

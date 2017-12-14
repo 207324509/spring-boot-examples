@@ -33,7 +33,7 @@ public class FileController {
      * @return
      * @throws IOException
      */
-    @RequestMapping(value = "/uploadFiles", method = RequestMethod.POST)
+    @RequestMapping(value = "/uploads", method = RequestMethod.POST)
     @ResponseBody
     public static Map<String, String> uploads(HttpServletRequest request) throws IOException {
         Map<String, String> result = new HashMap<String, String>();
