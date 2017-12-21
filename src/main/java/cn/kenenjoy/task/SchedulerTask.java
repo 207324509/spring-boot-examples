@@ -14,19 +14,19 @@ import java.util.Date;
 @Component
 public class SchedulerTask {
 
-    private static final Logger log = LoggerFactory.getLogger(SchedulerTask.class);
-
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-    private int count = 0;
-
-    @Scheduled(cron = "0/30 * * * * ?")
-    private void processCurrentTime1() {
-        log.info("this is scheduler task runing " + (count++)+"\t现在时间:" + dateFormat.format(new Date()));
-    }
-
-    @Scheduled(fixedRate = 6000)
-    public void reportCurrentTime2() {
+//    private static final Logger log = LoggerFactory.getLogger(SchedulerTask.class);
+//
+//    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//
+//    private int count = 0;
+//
+//    @Scheduled(cron = "0/30 * * * * ?")
+//    private void processCurrentTime1() {
+//        log.info("this is scheduler task runing " + (count++)+"\t现在时间:" + dateFormat.format(new Date()));
+//    }
+//
+//    @Scheduled(fixedRate = 6000)
+//    public void reportCurrentTime2() {
 //        System.out.println("现在时间：" + dateFormat.format(new Date()));
-    }
+//    }
 }

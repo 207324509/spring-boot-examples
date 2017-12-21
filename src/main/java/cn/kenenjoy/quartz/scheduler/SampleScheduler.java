@@ -16,28 +16,29 @@ import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 public class SampleScheduler {
     private static final Logger log = LoggerFactory.getLogger(SampleScheduler.class);
 
-    @Autowired
-    private SchedulerFactoryBean schedulerFactoryBean;
-
-    private JobDetail sampleJobDetail() {
-        return JobBuilder.newJob(SampleJob.class).withIdentity("sampleJob").usingJobData("name", "World").storeDurably().build();
-    }
-
-    private Trigger sampleJobTrigger() {
-        /**
-         * 执行时间间隔2秒钟
-         */
-        SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(2).repeatForever();
-        return TriggerBuilder.newTrigger().forJob(sampleJobDetail()).withIdentity("sampleTrigger", "group3").withSchedule(scheduleBuilder).build();
-    }
-
-    public void scheduleJobs() {
-        try {
-            Scheduler scheduler = schedulerFactoryBean.getScheduler();
-            scheduler.scheduleJob(sampleJobDetail(), sampleJobTrigger());
-        } catch (SchedulerException e) {
-            log.error(e.getMessage(), e);
-        }
-
-    }
+//    @Autowired
+//    private Scheduler scheduler;
+//
+//    private JobDetail sampleJobDetail() {
+//        return JobBuilder.newJob(SampleJob.class).withIdentity("sampleJob").usingJobData("name", "World").storeDurably().build();
+//    }
+//
+//    private Trigger sampleJobTrigger() {
+//        /**
+//         * 执行时间间隔2秒钟
+//         */
+//        SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(2).repeatForever();
+//        return TriggerBuilder.newTrigger().forJob(sampleJobDetail()).withIdentity("sampleTrigger", "group3").withSchedule(scheduleBuilder).build();
+//    }
+//
+//    /**
+//     * 加载任务
+//     */
+//    public void scheduleJobs() {
+//        try {
+//            scheduler.scheduleJob(sampleJobDetail(), sampleJobTrigger());
+//        } catch (SchedulerException e) {
+//            log.error(e.getMessage(), e);
+//        }
+//    }
 }
