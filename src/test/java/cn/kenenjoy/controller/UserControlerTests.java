@@ -1,6 +1,5 @@
 package cn.kenenjoy.controller;
 
-import cn.kenenjoy.controller.UserController;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,10 +34,8 @@ public class UserControlerTests {
 
     @Test
     public void getUsers() throws Exception {
-
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get("/get_users")).andDo(MockMvcResultHandlers.print()).andReturn();
         assertEquals(200, mvcResult.getResponse().getStatus());
-//        assertEquals("", mvcResult.getResponse().getContentAsString());
     }
 
 }
