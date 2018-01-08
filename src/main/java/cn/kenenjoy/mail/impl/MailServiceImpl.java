@@ -1,5 +1,6 @@
-package cn.kenenjoy.mail;
+package cn.kenenjoy.mail.impl;
 
+import cn.kenenjoy.mail.MailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,6 @@ import org.springframework.stereotype.Component;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-import java.net.URL;
 
 /**
  * Created by hefa on 2017/7/29.
