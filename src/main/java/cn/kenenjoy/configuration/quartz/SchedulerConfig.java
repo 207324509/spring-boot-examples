@@ -23,10 +23,14 @@ public class SchedulerConfig {
 //    @Autowired
 //    private DataSource dataSource;
 
+    @Autowired
+    private CustomJobFactory customJobFactory;
+
     @Bean
     public SchedulerFactoryBean schedulerFactoryBean() throws IOException {
         SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
         schedulerFactoryBean.setQuartzProperties(quartzProperties());
+        schedulerFactoryBean.setJobFactory(customJobFactory);
 //        schedulerFactoryBean.setDataSource(dataSource);
         return schedulerFactoryBean;
     }
