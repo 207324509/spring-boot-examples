@@ -26,7 +26,7 @@ public class MailServiceImpl implements MailService {
     @Autowired
     private JavaMailSender mailSender;
 
-    @Value("${mail.from.addr}")
+    @Value("${spring.mail.from.addr}")
     private String from;
 
     /**
