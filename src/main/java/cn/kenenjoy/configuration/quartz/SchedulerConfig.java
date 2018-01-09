@@ -1,6 +1,5 @@
 package cn.kenenjoy.configuration.quartz;
 
-import cn.kenenjoy.configuration.druid.DruidConnectionProvider;
 import org.quartz.Scheduler;
 import org.quartz.ee.servlet.QuartzInitializerListener;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 
-import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -20,18 +18,10 @@ import java.util.Properties;
 @Configuration
 public class SchedulerConfig {
 
-//    @Autowired
-//    private DataSource dataSource;
-
-    @Autowired
-    private CustomJobFactory customJobFactory;
-
     @Bean
     public SchedulerFactoryBean schedulerFactoryBean() throws IOException {
         SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
         schedulerFactoryBean.setQuartzProperties(quartzProperties());
-        schedulerFactoryBean.setJobFactory(customJobFactory);
-//        schedulerFactoryBean.setDataSource(dataSource);
         return schedulerFactoryBean;
     }
 

@@ -10,6 +10,7 @@ import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.jms.Destination;
 
@@ -27,10 +28,11 @@ public class ScheduledJob1 implements Job {
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+        SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
         log.info("schedule job1 is running ...");
         Destination destination = new ActiveMQQueue("someQueue");
         jmsProducer.sendMessage(destination, DateUtils.getNowDate());
 
-        producerService.sendMessage("someTopic","www.kenenjoy.cn",DateUtils.getNowDate());
+        producerService.sendMessage("someTopic", "www.kenenjoy.cn", DateUtils.getNowDate());
     }
 }
