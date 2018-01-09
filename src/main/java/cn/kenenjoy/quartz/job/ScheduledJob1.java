@@ -1,7 +1,8 @@
 package cn.kenenjoy.quartz.job;
 
-import cn.kenenjoy.jms.JMSProducer;
-import cn.kenenjoy.util.DateTool;
+import cn.kenenjoy.jms.impl.JMSProducer;
+import cn.kenenjoy.kafka.ProducerService;
+import cn.kenenjoy.util.DateUtils;
 import org.apache.activemq.command.ActiveMQQueue;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
@@ -21,10 +22,15 @@ public class ScheduledJob1 implements Job {
     @Autowired
     private JMSProducer jmsProducer;
 
+    @Autowired
+    private ProducerService producerService;
+
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         log.info("schedule job1 is running ...");
         Destination destination = new ActiveMQQueue("someQueue");
-        jmsProducer.sendMessage(destination, DateTool.getNowDate());
+        jmsProducer.sendMessage(destination, DateUtils.getNowDate());
+
+        producerService.sendMessage("someTopic","www.kenenjoy.cn",DateUtils.getNowDate());
     }
 }

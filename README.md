@@ -9,4 +9,5 @@
 7. Spring Boot集成Redis(支持Redis Sentinel和Redis Cluster)、数据缓存和session共享
 8. Spring Boot集成Druid
 9. Spring Boot集成ActiveMQ
-10. jQuery EasyUI
+10. Spring Boot集成Kafka
+11. jQuery EasyUI

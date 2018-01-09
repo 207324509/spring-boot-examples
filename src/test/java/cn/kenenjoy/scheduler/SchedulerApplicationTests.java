@@ -1,7 +1,8 @@
 package cn.kenenjoy.scheduler;
 
-import cn.kenenjoy.jms.JMSProducer;
-import cn.kenenjoy.util.DateTool;
+import cn.kenenjoy.jms.impl.JMSProducer;
+import cn.kenenjoy.kafka.ProducerService;
+import cn.kenenjoy.util.DateUtils;
 import org.apache.activemq.command.ActiveMQQueue;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,10 +21,14 @@ public class SchedulerApplicationTests {
     @Autowired
     private JMSProducer jmsProducer;
 
+    @Autowired
+    private ProducerService producerService;
+
     @Test
     public void contextLoads() {
         System.out.println("hello world!");
         Destination destination = new ActiveMQQueue("someQueue");
-        jmsProducer.sendMessage(destination, DateTool.getNowDate());
+        jmsProducer.sendMessage(destination, DateUtils.getNowDate());
+        producerService.sendMessage("someTopic", "www.kenenjoy.cn", DateUtils.getNowDate());
     }
 }
