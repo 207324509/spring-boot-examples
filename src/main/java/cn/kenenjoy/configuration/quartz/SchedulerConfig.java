@@ -17,11 +17,14 @@ import java.util.Properties;
  */
 @Configuration
 public class SchedulerConfig {
+    @Autowired
+    private CustomJobFactory customJobFactory;
 
     @Bean
     public SchedulerFactoryBean schedulerFactoryBean() throws IOException {
         SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
         schedulerFactoryBean.setQuartzProperties(quartzProperties());
+        schedulerFactoryBean.setJobFactory(customJobFactory);
         return schedulerFactoryBean;
     }
 
@@ -36,10 +39,11 @@ public class SchedulerConfig {
 
     /**
      * quartz初始化监听器
+     *
      * @return
      */
     @Bean
-    public QuartzInitializerListener executorListener(){
+    public QuartzInitializerListener executorListener() {
         return new QuartzInitializerListener();
     }
 
