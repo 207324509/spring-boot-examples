@@ -79,7 +79,7 @@ public class UserController {
      */
     @RequestMapping(value = "/get_users", produces = "text/html;charset=UTF-8")
     @ResponseBody
-    public String getUsers(String sort, String order,int page,int rows) {
+    public String getUsers(String sort, String order,String page,String rows) {
         log.debug("进入get_users");
         if (sort == null || "".equals(sort.trim())) {
             sort = "id";
@@ -89,13 +89,13 @@ public class UserController {
             order = "asc";
         }
 
-//        if (page == null ||"".equals(page.trim())){
-//            page = "1";
-//        }
-//        if (rows == null ||"".equals(rows.trim())){
-//            rows = "10";
-//        }
-        List<User> users = userService.getUsers(sort, order, page, rows);
+        if (page == null ||"".equals(page.trim())){
+            page = "1";
+        }
+        if (rows == null ||"".equals(rows.trim())){
+            rows = "10";
+        }
+        List<User> users = userService.getUsers(sort, order, Integer.valueOf(page), Integer.valueOf(rows));
         String total = userService.countUsers().toString();
         Map<String,Object> map = new HashMap<String,Object>();
         map.put("total",total);
@@ -150,7 +150,7 @@ public class UserController {
             try {
                 userService.saveUser(user);
                 result.setSuccess("success");
-            } catch (BadSqlGrammarException e) {
+            } catch (Exception e) {
                 result.setErrorMsg("保存用户数据库报错！");
                 log.error("保存用户数据库报错！", e);
             }
@@ -179,7 +179,7 @@ public class UserController {
         try {
             userService.deleteUser(id);
             result.setSuccess("success");
-        } catch (BadSqlGrammarException e) {
+        } catch (Exception e) {
             result.setErrorMsg("删除报错");
             log.error("删除用户报错", e);
         }

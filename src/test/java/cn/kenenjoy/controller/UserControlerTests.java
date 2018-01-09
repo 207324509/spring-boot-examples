@@ -5,12 +5,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 import static org.junit.Assert.assertEquals;
 
@@ -20,7 +23,6 @@ import static org.junit.Assert.assertEquals;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserControlerTests {
-
 
     private MockMvc mvc;
 
@@ -35,6 +37,18 @@ public class UserControlerTests {
     @Test
     public void getUsers() throws Exception {
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get("/get_users")).andDo(MockMvcResultHandlers.print()).andReturn();
+        assertEquals(200, mvcResult.getResponse().getStatus());
+    }
+
+    @Test
+    public void saveUser() throws Exception {
+        MultiValueMap multiValueMap = new LinkedMultiValueMap();
+        multiValueMap.add("firstname", "Two");
+        multiValueMap.add("lastname", "Lv");
+        multiValueMap.add("email", "lvtwo@wu.com");
+        multiValueMap.add("phone", "187126176271");
+
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.post("/save_user").contentType(MediaType.APPLICATION_FORM_URLENCODED).params(multiValueMap)).andDo(MockMvcResultHandlers.print()).andReturn();
         assertEquals(200, mvcResult.getResponse().getStatus());
     }
 
