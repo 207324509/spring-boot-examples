@@ -36,7 +36,12 @@ public class UserControlerTests {
 
     @Test
     public void getUsers() throws Exception {
-        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get("/get_users")).andDo(MockMvcResultHandlers.print()).andReturn();
+        MultiValueMap multiValueMap = new LinkedMultiValueMap();
+        multiValueMap.add("sort", "id");
+        multiValueMap.add("order", "asc");
+        multiValueMap.add("page", "1");
+        multiValueMap.add("rows", "10");
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get("/get_users").contentType(MediaType.APPLICATION_FORM_URLENCODED).params(multiValueMap)).andDo(MockMvcResultHandlers.print()).andReturn();
         assertEquals(200, mvcResult.getResponse().getStatus());
     }
 

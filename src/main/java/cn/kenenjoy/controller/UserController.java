@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -60,7 +61,7 @@ public class UserController {
     }
 
 
-    @RequestMapping(value = "get_feed", produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "get_feed", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public String getFeed(@RequestParam(value = "url", required = false) String url) {
         log.debug("进入delete_user");
@@ -77,7 +78,7 @@ public class UserController {
      *
      * @return
      */
-    @RequestMapping(value = "/get_users", produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "/get_users", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public String getUsers(String sort, String order,String page,String rows) {
         log.debug("进入get_users");
@@ -113,7 +114,7 @@ public class UserController {
      * @param user
      * @return
      */
-    @RequestMapping(value = "update_user", method = RequestMethod.POST)
+    @RequestMapping(value = "update_user", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public String updateUser(@ModelAttribute(value = "user") User user) {
         log.debug("进入update_user");
@@ -137,7 +138,7 @@ public class UserController {
      * @param user
      * @return
      */
-    @RequestMapping(value = "save_user", method = RequestMethod.POST)
+    @RequestMapping(value = "save_user", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public String saveUser(@ModelAttribute(value = "user") User user) {
         log.debug("进入save_user");
@@ -170,7 +171,7 @@ public class UserController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "delete_user", method = RequestMethod.POST)
+    @RequestMapping(value = "delete_user", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public String deleteUser(@RequestParam(value = "id", required = false) String id) {
         log.debug("进入delete_user");

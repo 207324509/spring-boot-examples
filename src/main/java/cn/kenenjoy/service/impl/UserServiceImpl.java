@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,7 +51,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveUser(User user) {
         userMapper.saveUser(user);
-        throw new NullPointerException();
     }
 
     @CacheEvict(value = {"users"}, allEntries = true)
