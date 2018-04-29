@@ -9,12 +9,14 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 /**
  * Created by hefa on 2017/7/28.
  */
-@MapperScan("cn.kenenjoy.mapper")
 @EnableScheduling
+@EnableWebSecurity
+@MapperScan("cn.kenenjoy.mapper")
 @ServletComponentScan
 @SpringBootApplication
 public class Application {
