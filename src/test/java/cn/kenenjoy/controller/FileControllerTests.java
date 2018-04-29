@@ -1,13 +1,13 @@
 package cn.kenenjoy.controller;
 
 
+import cn.kenenjoy.util.HttpsUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -64,13 +64,14 @@ public class FileControllerTests {
      * @param args
      * @throws IOException
      */
-    public void main(String[] args) throws IOException {
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        HttpPost httppost = new HttpPost("http://127.0.0.1:8080/file/uploads");
+    public static void main(String[] args) throws Exception {
+//        CloseableHttpClient httpclient = HttpClients.createDefault();
+        CloseableHttpClient httpclient = HttpsUtils.getHttpsClient();
+
+        HttpPost httppost = new HttpPost("https://127.0.0.1/uploadFiles.wms");
         MultipartEntityBuilder builder = MultipartEntityBuilder.create();
-        File file = new File("/Users/hefa/Downloads/abc.txt");
-        builder.addBinaryBody("abc.txt", file);
-        builder.addBinaryBody("abc2.txt", file);
+        File file = new File("/Users/hefa/Downloads/Icon1.zip");
+        builder.addBinaryBody("1.zip", file);
         httppost.setEntity(builder.build());
         CloseableHttpResponse response = httpclient.execute(httppost);
         if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
