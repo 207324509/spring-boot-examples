@@ -1,5 +1,6 @@
 package cn.kenenjoy.controller;
 
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,6 +55,19 @@ public class UserControlerTests {
         multiValueMap.add("phone", "187126176271");
 
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.post("/save_user").contentType(MediaType.APPLICATION_FORM_URLENCODED).params(multiValueMap)).andDo(MockMvcResultHandlers.print()).andReturn();
+        assertEquals(200, mvcResult.getResponse().getStatus());
+    }
+
+    @Test
+    public void updateUser() throws Exception {
+        MultiValueMap multiValueMap = new LinkedMultiValueMap();
+        multiValueMap.add("id","78799cb117274e4b8fe3e599ee83681e");
+        multiValueMap.add("firstname", "大羊");
+        multiValueMap.add("lastname", "黄");
+        multiValueMap.add("email", "huang@qq.com");
+        multiValueMap.add("phone", "13789127670");
+
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.post("/update_user").contentType(MediaType.APPLICATION_FORM_URLENCODED).params(multiValueMap)).andDo(MockMvcResultHandlers.print()).andReturn();
         assertEquals(200, mvcResult.getResponse().getStatus());
     }
 
