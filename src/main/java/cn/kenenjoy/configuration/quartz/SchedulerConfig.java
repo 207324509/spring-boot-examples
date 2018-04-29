@@ -24,7 +24,10 @@ public class SchedulerConfig {
     public SchedulerFactoryBean schedulerFactoryBean() throws IOException {
         SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
         schedulerFactoryBean.setQuartzProperties(quartzProperties());
+        schedulerFactoryBean.setOverwriteExistingJobs(true);
+        schedulerFactoryBean.setStartupDelay(60);
         schedulerFactoryBean.setJobFactory(customJobFactory);
+
         return schedulerFactoryBean;
     }
 
