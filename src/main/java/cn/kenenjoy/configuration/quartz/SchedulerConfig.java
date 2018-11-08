@@ -1,6 +1,9 @@
 package cn.kenenjoy.configuration.quartz;
 
+import cn.kenenjoy.domain.User;
+import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
 import org.quartz.ee.servlet.QuartzInitializerListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
@@ -9,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -17,17 +21,35 @@ import java.util.Properties;
  */
 @Configuration
 public class SchedulerConfig {
+
     @Autowired
-    private CustomJobFactory customJobFactory;
+    private AutowiringQuartzJobFactory jobFactory;
+
+    @Bean
+    public DataSource dataSource(){
+        return DruidDataSourceBuilder.create().build();
+    }
 
     @Bean
     public SchedulerFactoryBean schedulerFactoryBean() throws IOException {
+        Properties properties = quartzProperties();
+        properties.remove("org.quartz.jobStore.dataSource");
+        properties.remove("org.quartz.dataSource.druid.connectionProvider.class");
+        properties.remove("org.quartz.dataSource.druid.driverClassName");
+        properties.remove("org.quartz.dataSource.druid.url");
+        properties.remove("org.quartz.dataSource.druid.username");
+        properties.remove("org.quartz.dataSource.druid.password");
+        properties.remove("org.quartz.dataSource.druid.initialSize");
+        properties.remove("org.quartz.dataSource.druid.minIdle");
+        properties.remove("org.quartz.dataSource.druid.maxActive");
+        properties.remove("org.quartz.dataSource.druid.validationQuery");
         SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
-        schedulerFactoryBean.setQuartzProperties(quartzProperties());
-        schedulerFactoryBean.setOverwriteExistingJobs(true);
-        schedulerFactoryBean.setStartupDelay(60);
-        schedulerFactoryBean.setJobFactory(customJobFactory);
+        schedulerFactoryBean.setDataSource(dataSource());
+        schedulerFactoryBean.setQuartzProperties(properties);
 
+        // 启动时更新已存在的Job
+        schedulerFactoryBean.setOverwriteExistingJobs(true);
+        schedulerFactoryBean.setJobFactory(jobFactory);
         return schedulerFactoryBean;
     }
 
@@ -51,7 +73,10 @@ public class SchedulerConfig {
     }
 
     @Bean
-    public Scheduler scheduler() throws IOException {
-        return schedulerFactoryBean().getScheduler();
+    public Scheduler scheduler() throws IOException, SchedulerException {
+        Scheduler scheduler = schedulerFactoryBean().getScheduler();
+        scheduler.setJobFactory(jobFactory);
+        return scheduler;
     }
+
 }

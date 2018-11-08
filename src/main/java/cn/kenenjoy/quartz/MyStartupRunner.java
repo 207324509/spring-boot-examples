@@ -1,12 +1,6 @@
 package cn.kenenjoy.quartz;
 
-import cn.kenenjoy.quartz.scheduler.CronSchedulerJob;
-import cn.kenenjoy.quartz.scheduler.SampleScheduler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
 
 /**
  * 服务启动执行

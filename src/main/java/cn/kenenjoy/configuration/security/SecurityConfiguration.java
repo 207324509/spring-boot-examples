@@ -11,7 +11,7 @@ import org.springframework.security.core.session.SessionRegistryImpl;
 /**
  * Created by hefa on 2018/1/24.
  */
-//@Configuration
+@Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     /**定义认证用户信息获取来源，密码校验规则等*/
@@ -31,7 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/").permitAll()
+        http.authorizeRequests().antMatchers("/druid/**").permitAll()
                 .anyRequest().authenticated()
                 .and().logout().permitAll().and().formLogin();
         http

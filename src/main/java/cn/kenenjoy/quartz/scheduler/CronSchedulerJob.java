@@ -1,12 +1,7 @@
 package cn.kenenjoy.quartz.scheduler;
 
-import cn.kenenjoy.quartz.job.ScheduledJob1;
-import cn.kenenjoy.quartz.job.ScheduledJob2;
-import org.quartz.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Component;
 
 
